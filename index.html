@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Query Button</title>
+</head>
+<body>
+  <button onclick="queryData()">Query MySQL</button>
+  <pre id="output"></pre>
+
+  <script>
+    async function queryData() {
+      const res = await fetch("http://localhost:8000/query", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          query: "SELECT * FROM your_table_name LIMIT 10"
+        })
+      });
+      const json = await res.json();
+      document.getElementById("output").textContent = JSON.stringify(json, null, 2);
+    }
+  </script>
+</body>
+</html>
